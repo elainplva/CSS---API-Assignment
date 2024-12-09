@@ -23,8 +23,7 @@ async function fetchBooksByKeyword(keyword) {
         bookInfo.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
 
         if (data.books && data.books.length > 0) {
-            bookInfo.innerHTML = '';
-            renderBookCards(data.books, bookInfo);
+            renderBookCards(data.books);
         } else {
             bookInfo.innerHTML = '<p>No books found for the given keyword. Please try another search.</p>';
         }
@@ -54,8 +53,7 @@ async function fetchBooksByAuthor(authorId) {
         bookInfo.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
 
         if (data.author && data.author.books && data.author.books.length > 0) {
-            bookInfo.innerHTML = '';
-            renderBookCards(data.author.books, bookInfo);
+            renderBookCards(data.author.books);
         } else {
             bookInfo.innerHTML = '<p>No books found for the given author ID. Please try another search.</p>';
         }
@@ -65,8 +63,11 @@ async function fetchBooksByAuthor(authorId) {
 }
 
 function renderBookCards(books) {
-    books.forEach(book => {
-        const conatiner = document.getElementById('book-info')
+    const bookInfo = document.getElementById('book-info');
+
+    bookInfo.innerHTML += '<hr><h2>Formatted Book Results</h2>';
+        books.forEach(book => {
+        const conatiner = document.getElementsByClassName('container')
 
         container.innerHTML += '<hr><h2>Formatted Book Results</h2>';
 
