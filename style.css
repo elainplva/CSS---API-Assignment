@@ -1,0 +1,15 @@
+.container {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.book {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+img {
+    display: block;
+    margin: 10px 0;
+}
