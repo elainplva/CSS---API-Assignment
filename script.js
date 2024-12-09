@@ -20,7 +20,8 @@ async function fetchBooksByKeyword(keyword) {
         }
 
         const data = await response.json();
-        bookInfo.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        console.log('Fetched Data:', data);
+
 
         if (data.books && data.books.length > 0) {
             bookInfo.innerHTML = '';
@@ -51,7 +52,8 @@ async function fetchBooksByAuthor(authorId) {
         }
 
         const data = await response.json();
-        bookInfo.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        console.log('Fetched Data:', data);
+
 
         if (data.author && data.author.books && data.author.books.length > 0) {
             bookInfo.innerHTML = '';
@@ -65,14 +67,13 @@ async function fetchBooksByAuthor(authorId) {
 }
 
 function renderBookCards(books) {
-    const conatiner = document.getElementById('book-info')
+    const container = document.getElementById('book-info')
 
     container.innerHTML += '<hr><h2>Formatted Book Results</h2>';
 
     books.forEach(book => {
         const card = document.createElement('div');
         card.setAttribute('class', 'card');
-        card.style.marginBottom = '20px';
 
         const h2 = document.createElement('h2');
         h2.textContent = book.title || 'No Title Available';
@@ -83,10 +84,10 @@ function renderBookCards(books) {
         bookImg.setAttribute('height', '350px');
 
         const authorId = document.createElement('h4');
-        authorId.textContent = 'Author ID: ' + book.author.id ;
+        authorId.textContent = 'Author ID: ' + book.author?.id ;
 
         const authorN = document.createElement('h4');
-        authorN.textContent = 'Author Name: ' + book.author.name ;
+        authorN.textContent = 'Author Name: ' + book.author?.name ;
 
         const bookId = document.createElement('h5');
         bookId.textContent = 'Book ID: ' + book.id ;
@@ -127,6 +128,6 @@ function renderBookCards(books) {
             bookInfo.innerHTML = '<p>Please enter a keyword.</p>';
             return;
         }
-        fetchBooksByKeyword(keyword); // Adjust this to call the correct function
+        fetchBooksByKeyword(keyword); 
     });
 })();
