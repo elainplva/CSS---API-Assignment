@@ -23,7 +23,8 @@ async function fetchBooksByKeyword(keyword) {
         bookInfo.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
 
         if (data.books && data.books.length > 0) {
-            renderBookCards(data.books);
+            bookInfo.innerHTML = '';
+            renderBookCards(data.books , bookInfo);
         } else {
             bookInfo.innerHTML = '<p>No books found for the given keyword. Please try another search.</p>';
         }
@@ -53,7 +54,8 @@ async function fetchBooksByAuthor(authorId) {
         bookInfo.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
 
         if (data.author && data.author.books && data.author.books.length > 0) {
-            renderBookCards(data.author.books);
+            bookInfo.innerHTML = '';
+            renderBookCards(data.author.books, bookInfo);
         } else {
             bookInfo.innerHTML = '<p>No books found for the given author ID. Please try another search.</p>';
         }
@@ -63,14 +65,11 @@ async function fetchBooksByAuthor(authorId) {
 }
 
 function renderBookCards(books) {
-    const bookInfo = document.getElementById('book-info');
+    const conatiner = document.getElementById('book-info')
 
-    bookInfo.innerHTML += '<hr><h2>Formatted Book Results</h2>';
-        books.forEach(book => {
-        const conatiner = document.getElementsByClassName('container')
+    container.innerHTML += '<hr><h2>Formatted Book Results</h2>';
 
-        container.innerHTML += '<hr><h2>Formatted Book Results</h2>';
-
+    books.forEach(book => {
         const card = document.createElement('div');
         card.setAttribute('class', 'card');
         card.style.marginBottom = '20px';
