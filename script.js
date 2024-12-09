@@ -74,6 +74,7 @@ function renderBookCards(books) {
     books.forEach(book => {
         const card = document.createElement('div');
         card.setAttribute('class', 'card');
+        card.style.marginBottom = '20px';
 
         const h2 = document.createElement('h2');
         h2.textContent = book.title || 'No Title Available';
@@ -84,10 +85,10 @@ function renderBookCards(books) {
         bookImg.setAttribute('height', '350px');
 
         const authorId = document.createElement('h4');
-        authorId.textContent = 'Author ID: ' + book.author?.id ;
+        authorId.textContent = 'Author ID: ' + book.author.id ;
 
         const authorN = document.createElement('h4');
-        authorN.textContent = 'Author Name: ' + book.author?.name ;
+        authorN.textContent = 'Author Name: ' + book.author.name ;
 
         const bookId = document.createElement('h5');
         bookId.textContent = 'Book ID: ' + book.id ;
@@ -113,6 +114,7 @@ function renderBookCards(books) {
         card.appendChild(bookRank);
         card.appendChild(bookRating);
         card.appendChild(bookTotalRatings);
+        
         container.appendChild(card);
     });
 }
