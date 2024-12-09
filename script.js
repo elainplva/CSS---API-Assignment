@@ -20,7 +20,7 @@ async function fetchBooksByKeyword(keyword) {
         }
 
         const data = await response.json();
-        console.log('Keyword Search Data:', data);
+        bookInfo.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
 
         if (data.books && data.books.length > 0) {
             bookInfo.innerHTML = '';
@@ -51,7 +51,7 @@ async function fetchBooksByAuthor(authorId) {
         }
 
         const data = await response.json();
-        console.log('Author Books Data:', data); 
+        bookInfo.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
 
         if (data.author && data.author.books && data.author.books.length > 0) {
             bookInfo.innerHTML = '';
@@ -66,8 +66,9 @@ async function fetchBooksByAuthor(authorId) {
 
 function renderBookCards(books) {
     books.forEach(book => {
-        const conatiner = document.getElementsByClassName('container')
+        const conatiner = document.getElementById('book-info')
 
+        container.innerHTML += '<hr><h2>Formatted Book Results</h2>';
 
         const card = document.createElement('div');
         card.setAttribute('class', 'card');
@@ -82,25 +83,25 @@ function renderBookCards(books) {
         bookImg.setAttribute('height', '350px');
 
         const authorId = document.createElement('h4');
-        authorId.textContent = 'Author ID: ' + (book.author?.id || 'N/A');
+        authorId.textContent = 'Author ID: ' + book.author.id ;
 
         const authorN = document.createElement('h4');
-        authorN.textContent = 'Author Name: ' + (book.author?.name || 'N/A');
+        authorN.textContent = 'Author Name: ' + book.author.name ;
 
         const bookId = document.createElement('h5');
-        bookId.textContent = 'Book ID: ' + (book.id || 'N/A');
+        bookId.textContent = 'Book ID: ' + book.id ;
 
         const bookYear = document.createElement('h5');
-        bookYear.textContent = 'Book Published Year: ' + (book.publishedYear || 'N/A');
+        bookYear.textContent = 'Book Published Year: ' + book.publishedYear ;
 
         const bookRank = document.createElement('h5');
-        bookRank.textContent = 'Book Rank: ' + (book.rank || 'N/A');
+        bookRank.textContent = 'Book Rank: ' + book.rank ;
 
         const bookRating = document.createElement('h5');
-        bookRating.textContent = 'Book Rating: ' + (book.rating || 'N/A');
+        bookRating.textContent = 'Book Rating: ' + book.rating ;
 
         const bookTotalRatings = document.createElement('h5');
-        bookTotalRatings.textContent = 'Book Total Ratings: ' + (book.totalRatings || 'N/A');
+        bookTotalRatings.textContent = 'Book Total Ratings: ' + book.totalRatings ;
 
         card.appendChild(h2);
         card.appendChild(bookImg);
