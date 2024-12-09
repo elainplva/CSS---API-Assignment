@@ -20,7 +20,7 @@ async function fetchBooksByKeyword(keyword) {
         }
 
         const data = await response.json();
-        console.log('Keyword Search Data:', data); // Debugging
+        console.log('Keyword Search Data:', data);
 
         if (data.books && data.books.length > 0) {
             bookInfo.innerHTML = '';
@@ -51,7 +51,7 @@ async function fetchBooksByAuthor(authorId) {
         }
 
         const data = await response.json();
-        console.log('Author Books Data:', data); // Debugging
+        console.log('Author Books Data:', data); 
 
         if (data.author && data.author.books && data.author.books.length > 0) {
             bookInfo.innerHTML = '';
@@ -64,35 +64,53 @@ async function fetchBooksByAuthor(authorId) {
     }
 }
 
-function renderBookCards(books, container) {
+function renderBookCards(books) {
     books.forEach(book => {
+        const conatiner = document.getElementsByClassName('container')
+
+
         const card = document.createElement('div');
-        card.className = 'card';
+        card.setAttribute('class', 'card');
         card.style.marginBottom = '20px';
 
         const h2 = document.createElement('h2');
         h2.textContent = book.title || 'No Title Available';
 
         const bookImg = document.createElement('img');
-        bookImg.src = book.image_url || 'https://via.placeholder.com/150?text=No+Image';
-        bookImg.style.width = '200px';
-        bookImg.style.height = '350px';
+        bookImg.setAttribute('src', book.imageUrl || 'https://via.placeholder.com/150?text=No+Image');
+        bookImg.setAttribute('width', '200px');
+        bookImg.setAttribute('height', '350px');
+
+        const authorId = document.createElement('h4');
+        authorId.textContent = 'Author ID: ' + (book.author?.id || 'N/A');
 
         const authorN = document.createElement('h4');
         authorN.textContent = 'Author Name: ' + (book.author?.name || 'N/A');
 
+        const bookId = document.createElement('h5');
+        bookId.textContent = 'Book ID: ' + (book.id || 'N/A');
+
         const bookYear = document.createElement('h5');
-        bookYear.textContent = 'Published Year: ' + (book.published_year || 'N/A');
+        bookYear.textContent = 'Book Published Year: ' + (book.publishedYear || 'N/A');
+
+        const bookRank = document.createElement('h5');
+        bookRank.textContent = 'Book Rank: ' + (book.rank || 'N/A');
 
         const bookRating = document.createElement('h5');
-        bookRating.textContent = 'Rating: ' + (book.rating || 'N/A');
+        bookRating.textContent = 'Book Rating: ' + (book.rating || 'N/A');
+
+        const bookTotalRatings = document.createElement('h5');
+        bookTotalRatings.textContent = 'Book Total Ratings: ' + (book.totalRatings || 'N/A');
 
         card.appendChild(h2);
         card.appendChild(bookImg);
+        card.appendChild(authorId);
         card.appendChild(authorN);
+        card.appendChild(bookId);
         card.appendChild(bookYear);
+        card.appendChild(bookRank);
         card.appendChild(bookRating);
-
+        card.appendChild(bookTotalRatings);
         container.appendChild(card);
     });
 }
